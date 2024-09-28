@@ -1,0 +1,4 @@
+.git* export-ignore
+.lua-format export-ignore
+synergyExporter.lua export-ignore
+makefile export-ignore
