@@ -14,8 +14,8 @@ end
 function r.OnAddOnLoaded(event, addonName)
     if addonName == r.name then
         r.Initialize()
-        EVENT_MANAGER:UnregisterForEvent(r.name, EVENT_ADD_ON_LOADED)
+        EM:UnregisterForEvent(r.name, EVENT_ADD_ON_LOADED)
     end
 end
 
-EVENT_MANAGER:RegisterForEvent(r.name, EVENT_ADD_ON_LOADED, r.OnAddOnLoaded)
+EM:RegisterForEvent(r.name, EVENT_ADD_ON_LOADED, r.OnAddOnLoaded)
