@@ -5,11 +5,15 @@ SRC_DIR = . # Directory containing Lua files
 LUA_FILES = $(shell find $(SRC_DIR) -name "*.lua")
 ADDON_PATH = $(shell pwd)
 
-all: clean format zip
+all: clean format $(NAME).txt zip
+
+$(NAME).txt: build.lua $(wildcard modules/*.lua)
+	lua build.lua > $(NAME).txt
 
 clean:
 	@echo "Removing Build Artifacts"
-	rm $(NAME).zip
+	-rm $(NAME).txt
+	-rm $(NAME).zip
 	@echo "Done"
 
 # Format all Lua files

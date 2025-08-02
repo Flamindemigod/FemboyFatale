@@ -14,13 +14,8 @@ function r.buildMenu()
         registerForRefresh = true
     }
 
-    local generalOptions = {
-        {
-            type = "description",
-            text = "A bunch of PvP Utils made for a certain Femboy"
-        }
-    }
-
+    local generalOptions = {{type = "description", text = r.description}}
+    for _, v in pairs(r.modules) do v.menu(generalOptions); end
     LAM:RegisterAddonPanel(r.name .. "GeneralOptions", panelData)
     LAM:RegisterOptionControls(r.name .. "GeneralOptions", generalOptions)
 end
