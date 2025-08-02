@@ -14,5 +14,6 @@ print("")
 print("FemboyFatale.lua")
 print("FemboyFatale.xml")
 print("FemboyFataleMenu.lua")
+print("FemboyFataleUtils.lua")
 print("")
 for dir in io.popen("ls modules"):lines() do print("modules/" .. dir) end

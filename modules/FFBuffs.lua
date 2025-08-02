@@ -1,3 +1,8 @@
+-- A lot of this module is heavily derived from Buff The Group
+-- https://github.com/Fostecks/BuffTheGroup
+-- I'm moving a lot of the code into a this module but rewriting it to be a lot more maintainable than it is currently
+-- However Bitrock(Fostecks) and garlicmoon should still be considered the primary author of this code.
+-- As the functionailty will be unchanged
 FemboyFatale = FemboyFatale or {}
 local r = FemboyFatale
 FFBuffs = FFBuffs or {}

@@ -5,7 +5,7 @@ r.EM = GetEventManager()
 
 r.name = "FemboyFatale"
 r.description = "A bunch of PvP Utils made for a certain Femboy"
-r.author = "|cFFA500FlaminDemigod|r"
+r.author = "|cFFA500FlaminDemigod|r, bitrock, garlicmoon"
 r.version = "0.0.2"
 r.variableVersion = 1
 -- r.stack = {w = 0, h = 0, items = {}}
