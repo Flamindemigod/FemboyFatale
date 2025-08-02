@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<GuiXml>
+  <Controls layer="CONTROLS">
+    <Control virtual="true" name="FFBar">
+      <OnInitialized>
+        self.barLabel = self:GetNamedChild("Label")
+        self.bar = self:GetNamedChild("StatusBar")
+        self.bg = self:GetNamedChild("Backdrop")
+        self:SetHeight(self.barLabel:GetHeight() + self.bar:GetHeight())
+        self:SetWidth(math.max(self.barLabel:GetWidth(), self.bar:GetWidth()))
+        self.bg:SetHeight(self:GetHeight())
+        self.bg:SetWidth(self:GetWidth())
+      </OnInitialized>
+      <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT"/>
+      <Controls>
+           <Backdrop name="$(parent)Backdrop" centerColor="1e1e1e" edgeColor="00000000" alpha="0.6" >
+              <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT"/>
+           </Backdrop>
+           <Label name="$(parent)Label" font="$(GAMEPAD_MEDIUM_FONT)|32|soft-shadow-thin" color="ffffff" text="StatusBar" verticalAlignment="CENTER" horizontalAlignment="LEFT" offsetX="4"  alpha="0.85">			
+              <Dimensions x="400" />
+              <Anchor point="TOPLEFT"  relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="0" offsetY="0"/>
+           </Label>
+           <StatusBar name="$(parent)StatusBar" color="8A2BE2" alpha="1">
+              <Dimensions x="400" y="30" />
+              <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="0"/>
+              <Limits min="0" max="100" />
+           </StatusBar>
+        </Controls>
+
+      </Control>
+    <Control virtual="true" name="FFSlice">
+      <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT"/>
+      <!-- <Dimensions y="30"/> -->
+      <!-- <Controls> -->
+      <!--   <Label name="$(parent)Label" width="200" height="25" font="ZoFontWinH1" inheritAlpha="true" color="FF0000" wrapMode="TRUNCATE" verticalAlignment="TOP" horizontalAlignment="CENTER" text="Fighting!"> -->
+      <!--     <Anchor point="TOP" relativeTo="$(parent)" relativePoint="TOP"/> -->
+      <!--   </Label> -->
+      <!-- </Controls> -->
+    </Control>
+    <TopLevelControl name="FemboyFataleStack" mouseEnabled="true" movable="true" clampedToScreen="true" resizeToFitDescendents="true">
+      <!-- <Dimensions x="200"/> -->
+      <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-20"/>
+    </TopLevelControl>
+  </Controls>
+</GuiXml>
