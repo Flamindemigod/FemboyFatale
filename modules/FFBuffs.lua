@@ -15,7 +15,6 @@ s.defaults = {
     gradientMode = true,
     showOnlyDPS = false,
     singleColumnMode = false,
-    minimalMode = false,
     trackedBuffs = {},
     framePositions = {},
     maxRows = 6,
@@ -276,10 +275,6 @@ function s.reset()
     for _, buff in pairs(s.data.buffs) do
         local i = buff.id
         s.frames[buff.id].frame:GetNamedChild("Icon"):SetTexture(buff.icon)
-        s.frames[buff.id].frame:GetNamedChild("MinimalBackdrop"):SetHidden(
-            not s.sv.minimalMode)
-        s.frames[buff.id].frame:GetNamedChild("Percent"):SetHidden(not s.sv
-                                                                       .minimalMode)
     end
 
     local panelIndex = FFUtils.Iota();
@@ -336,8 +331,7 @@ function s.reset()
                             TOPLEFT, s.frames[buff.id].panels[pIndex -
                                 s.sv.maxRows].panel, TOPRIGHT, 0, 0)
                     end
-                    s.frames[buff.id].panels[pIndex].panel:SetHidden(s.sv
-                                                                         .minimalMode)
+                    s.frames[buff.id].panels[pIndex].panel:SetHidden(false)
                 else
                     s.frames[buff.id].panels[pIndex].panel:SetAnchor(TOPLEFT,
                                                                      FFBuffFrame,
@@ -437,10 +431,6 @@ function s.updateStatus(id, unitTag)
     end
 end
 
-function s.updatePercent(id, unitsWithBuff, minBuffDuration, minBuffEndTime)
-    d("TODO: updatePercent")
-end
-
 function s.handleCommandInput(args)
     d("TODO: Debug Handler")
     s.sv.enabled = not s.sv.enabled
@@ -464,10 +454,6 @@ function s.InitializeControls()
                          function() s.onMoveStop(buff.id, frame) end)
 
         s.frames[buff.id] = {frame = frame, panels = {}}
-        local bg = frame:GetNamedChild("MinimalBackdrop")
-
-        bg:SetEdgeColor(0, 0, 0, 0)
-        bg:SetCenterColor(0, 0, 0, 0.5)
 
         for i = 1, GROUP_SIZE_MAX do
             local panel = r.WM:CreateControlFromVirtual(
@@ -614,26 +600,8 @@ end
 
 function s.refreshUI()
     for _, buff in pairs(s.data.buffs) do
-        local unitsWithBuff = 0
-        local minBuffDuration = 999
-        local minBuffEndTime = 0
         for unitTag, unit in pairs(s.units) do
-            if (s.sv.minimalMode) then
-                local unitBuff = unit.buffs[buff.id]
-                if (unitBuff and unitBuff.hasBuff) then
-                    unitsWithBuff = unitsWithBuff + 1
-                    if (minBuffDuration > unitBuff.buffDuration) then
-                        minBuffDuration = unitBuff.buffDuration
-                        minBuffEndTime = unitBuff.endTime
-                    end
-                end
-            else
-                s.updateStatus(buff.id, unitTag)
-            end
-        end
-        if (s.sv.minimalMode) then
-            s.updatePercent(buff.id, unitsWithBuff, minBuffDuration,
-                            minBuffEndTime)
+            s.updateStatus(buff.id, unitTag)
         end
     end
 end
@@ -677,16 +645,6 @@ function s.menu(root)
                     else
                         s.sv.maxRows = 6
                     end
-                    zo_callLater(s.checkActivation, 500)
-                end
-            }, {
-                type = "checkbox",
-                name = "Minimal Mode",
-                tooltip = "Reduces the UI to a simple percentage display. The color background represents the time left on the buff. Respects the \'Show Only DPS\' option.",
-                default = s.defaults.minimalMode,
-                getFunc = function() return s.sv.minimalMode end,
-                setFunc = function(value)
-                    s.sv.minimalMode = value
                     zo_callLater(s.checkActivation, 500)
                 end
             }, {
