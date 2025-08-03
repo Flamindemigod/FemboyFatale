@@ -1,6 +1,65 @@
 <?xml version="1.0"?>
 <GuiXml>
   <Controls layer="CONTROLS">
+    <!--Yoinked from BTG 
+        https://github.com/Fostecks/BuffTheGroup
+        Basically the same. Just modifyied some ids to better fit
+    -->
+    <!--Default BTG Player Tracking Panel
+        Lacks the Buff Icons
+    -->
+    <Control name="FFBuffPanel" resizeToFitDescendents="true" hidden="true" virtual="true">
+    <!-- Background -->
+      <Controls>
+        <Backdrop name="$(parent)Backdrop">
+          <Anchor point="LEFT" />
+          <Dimensions x="160" y="24" />
+        </Backdrop>
+
+        <!-- Player Role Icon -->
+        <Texture name="$(parent)Role">
+          <Anchor point="LEFT" offsetX="2"/>
+          <Dimensions x="20" y="20" />
+        </Texture>
+
+        <!-- Player Name -->
+        <Label name="$(parent)Name" font="$(GAMEPAD_MEDIUM_FONT)|$(KB_17)|soft-shadow-thin" wrapMode="ELLIPSIS" horizontalAlignment="LEFT" verticalAlignment="CENTER" >
+          <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$(parent)Role" offsetX="2"/>
+          <Dimensions x="106" y="24" offsetY="-1" />
+        </Label>
+
+        <!-- Player Stat -->
+        <Label name="$(parent)Stat" font="$(GAMEPAD_MEDIUM_FONT)|$(KB_17)|soft-shadow-thin" wrapMode="TRUNCATE" horizontalAlignment="RIGHT" verticalAlignment="CENTER" >
+          <Anchor point="RIGHT" offsetX="-4"/>
+          <Dimensions x="50" y="24" />
+        </Label>
+      </Controls>
+    </Control>
+    <!--Top Level BTG Control
+        Contains the Buff Icon
+        A small control for the minimal mode
+    -->
+    <TopLevelControl name="FFBuffFrame" resizeToFitDescendents="true" mouseEnabled="true" movable="true" clampedToScreen="true" hidden="true" virtual="true">
+      <!--Buff Icon--> 
+      <Controls>
+        <Texture name ="$(parent)Icon">
+            <Anchor point="BOTTOM" relativeTo="$(parent)" relativePoint="TOP" />
+            <Dimensions x="36" y="36"/>
+        </Texture>
+      </Controls>
+      <!--Minimal Mode Control-->
+      <Controls>
+        <Backdrop name="$(parent)MinimalBackdrop">
+          <Anchor point="TOP" relativeTo="$(parent)Icon" relativePoint="BOTTOM" offsetY="5" />
+          <Dimensions x="64" y="40" />
+        </Backdrop>
+        <Label name="$(parent)Percent" font="$(GAMEPAD_MEDIUM_FONT)|$(KB_36)|soft-shadow-thin" wrapMode="TRUNCATE" horizontalAlignment="CENTER" verticalAlignment="CENTER">
+          <Anchor point="TOP" relativeTo="$(parent)Icon" relativePoint="BOTTOM" offsetY="4" />
+          <Dimensions x="72" y="36" />
+        </Label>
+      </Controls>
+    </TopLevelControl>
+
     <Control virtual="true" name="FFBar">
       <OnInitialized>
         self.barLabel = self:GetNamedChild("Label")

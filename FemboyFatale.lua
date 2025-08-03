@@ -1,7 +1,7 @@
 FemboyFatale = FemboyFatale or {}
 local r = FemboyFatale
 r.EM = GetEventManager()
--- r.WM = GetWindowManager()
+r.WM = GetWindowManager()
 
 r.name = "FemboyFatale"
 r.description = "A bunch of PvP Utils made for a certain Femboy"

@@ -1,5 +1,6 @@
 -- Stub Out Some ESO API Stuff
 function GetEventManager() return {RegisterForEvent = function() end}; end
+function GetWindowManager() return {} end
 
 require("FemboyFatale")
 
