@@ -264,8 +264,8 @@ end
 function s.reset()
     for _, buff in pairs(s.data.buffs) do
         for i = 1, GROUP_SIZE_MAX do
-            btg.frames[buff.id].panels[i].panel:ClearAnchors()
-            btg.frames[buff.id].panels[i].panel:SetHidden(true)
+            s.frames[buff.id].panels[i].panel:ClearAnchors()
+            s.frames[buff.id].panels[i].panel:SetHidden(true)
         end
     end
 
@@ -727,9 +727,9 @@ function s.menu(root)
         }
     }
 
-    local majorInsert = 10
-    local minorInsert = 11
-    local etcInsert = 12
+    local majorInsert = 9
+    local minorInsert = 10
+    local etcInsert = 11
     for j, buff in pairs(s.data.buffs) do
         local buffName = GetAbilityName(buff.abilityId)
         local buffOption = {
