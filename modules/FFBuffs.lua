@@ -45,214 +45,55 @@ s.data = {
         [LFG_ROLE_INVALID] = "/esoui/art/crafting/gamepad/crafting_alchemy_trait_unknown.dds"
     },
     buffs = {
-        {
-            id = iota(),
-            abilityId = 61771,
-            icon = "/esoui/art/icons/ability_healer_019.dds",
-            decayedId = nil
-        }, -- Powerful Assault  
+        {id = iota(), abilityId = 61771, decayedId = nil}, -- Powerful Assault  
         {
             id = iota(),
             abilityId = 93109,
             icon = "/esoui/art/icons/procs_006.dds",
             decayedId = nil
         }, -- Major Slayer
-        {
-            id = iota(),
-            abilityId = 109966,
-            icon = "/esoui/art/icons/ability_buff_major_courage.dds",
-            decayedId = nil
-        }, -- Major Courage
-        {
-            id = iota(),
-            abilityId = 61747,
-            icon = "/esoui/art/icons/ability_buff_major_force.dds",
-            decayedId = nil
-        }, -- Major Force
-        {
-            id = iota(),
-            abilityId = 62195,
-            icon = "/esoui/art/icons/ability_buff_major_berserk.dds",
-            decayedId = nil
-        }, -- Major Berserk
-        {
-            id = iota(),
-            abilityId = 61744,
-            icon = "/esoui/art/icons/ability_buff_minor_berserk.dds",
-            decayedId = nil
-        }, -- Minor Berserk
-        {
-            id = iota(),
-            abilityId = 147417,
-            icon = "/esoui/art/icons/ability_buff_minor_courage.dds",
-            decayedId = nil
-        }, -- Minor Courage
-        {
-            id = iota(),
-            abilityId = 61687,
-            icon = "/esoui/art/icons/ability_buff_major_sorcery.dds",
-            decayedId = nil
-        }, -- Major Sorcery
-        {
-            id = iota(),
-            abilityId = 61685,
-            icon = "/esoui/art/icons/ability_buff_minor_sorcery.dds",
-            decayedId = nil
-        }, -- Minor Sorcery
-        {
-            id = iota(),
-            abilityId = 61665,
-            icon = "/esoui/art/icons/ability_buff_major_brutality.dds",
-            decayedId = nil
-        }, -- Major Brutality
-        {
-            id = iota(),
-            abilityId = 61691,
-            icon = "/esoui/art/icons/ability_buff_minor_prophecy.dds",
-            decayedId = nil
-        }, -- Minor Prophecy
-        {
-            id = iota(),
-            abilityId = 61694,
-            icon = "/esoui/art/icons/ability_buff_major_resolve.dds",
-            decayedId = nil
-        }, -- Major Resolve
-        {
-            id = iota(),
-            abilityId = 61693,
-            icon = "/esoui/art/icons/ability_buff_minor_resolve.dds",
-            decayedId = nil
-        }, -- Minor Resolve
-        {
-            id = iota(),
-            abilityId = 61706,
-            icon = "/esoui/art/icons/ability_buff_minor_intellect.dds",
-            decayedId = nil
-        }, -- Minor Intellect
-        {
-            id = iota(),
-            abilityId = 61737,
-            icon = "/esoui/art/icons/ability_buff_major_empower.dds",
-            decayedId = nil
-        }, -- Empower
-        {
-            id = iota(),
-            abilityId = 61709,
-            icon = "/esoui/art/icons/ability_buff_major_heroism.dds",
-            decayedId = nil
-        }, -- Major Heroism
-        {
-            id = iota(),
-            abilityId = 40079,
-            icon = "/esoui/art/icons/ability_restorationstaff_002a.dds",
-            decayedId = nil
-        }, -- Radiating Regeneration
-        {
-            id = iota(),
-            abilityId = 61736,
-            icon = "/esoui/art/icons/ability_buff_major_expedition.dds",
-            decayedId = nil
-        }, -- Major Expedition
-        {
-            id = iota(),
-            abilityId = 163401,
-            icon = "/esoui/art/icons/achievement_u30_groupboss5.dds",
-            decayedId = nil
-        }, -- Spalder of Ruin
-        {
-            id = iota(),
-            abilityId = 88490,
-            icon = "/esoui/art/icons/ability_buff_minor_toughness.dds",
-            decayedId = nil
-        }, -- Minor Toughness
-        {
-            id = iota(),
-            abilityId = 61704,
-            icon = "/esoui/art/icons/ability_buff_minor_endurance.dds",
-            decayedId = nil
-        }, -- Minor Endurance
-        {
-            id = iota(),
-            abilityId = 61666,
-            icon = "/esoui/art/icons/ability_buff_minor_savagery.dds",
-            decayedId = nil
-        }, -- Minor Savagery
-        {
-            id = iota(),
-            abilityId = 61735,
-            icon = "/esoui/art/icons/ability_buff_minor_expedition.dds",
-            decayedId = nil
-        }, -- Minor Expedition
-        {
-            id = iota(),
-            abilityId = 172055,
-            icon = "/esoui/art/icons/ability_healer_030.dds",
-            decayedId = 172056
-        }, -- Pillager's Profit Cooldown
-        {
-            id = iota(),
-            abilityId = 166731,
-            icon = "buffthegroup/Icons/AstoRallyingCry.dds",
-            decayedId = nil
-        }, -- Rallying Cry
+        {id = iota(), abilityId = 109966, decayedId = nil}, -- Major Courage
+        {id = iota(), abilityId = 61747, decayedId = nil}, -- Major Force
+        {id = iota(), abilityId = 62195, decayedId = nil}, -- Major Berserk
+        {id = iota(), abilityId = 61744, decayedId = nil}, -- Minor Berserk
+        {id = iota(), abilityId = 147417, decayedId = nil}, -- Minor Courage
+        {id = iota(), abilityId = 61687, decayedId = nil}, -- Major Sorcery
+        {id = iota(), abilityId = 61685, decayedId = nil}, -- Minor Sorcery
+        {id = iota(), abilityId = 61665, decayedId = nil}, -- Major Brutality
+        {id = iota(), abilityId = 61691, decayedId = nil}, -- Minor Prophecy
+        {id = iota(), abilityId = 61694, decayedId = nil}, -- Major Resolve
+        {id = iota(), abilityId = 61693, decayedId = nil}, -- Minor Resolve
+        {id = iota(), abilityId = 61706, decayedId = nil}, -- Minor Intellect
+        {id = iota(), abilityId = 61737, decayedId = nil}, -- Empower
+        {id = iota(), abilityId = 61709, decayedId = nil}, -- Major Heroism
+        {id = iota(), abilityId = 40079, decayedId = nil}, -- Radiating Regeneration
+        {id = iota(), abilityId = 61736, decayedId = nil}, -- Major Expedition
+        {id = iota(), abilityId = 163401, decayedId = nil}, -- Spalder of Ruin
+        {id = iota(), abilityId = 88490, decayedId = nil}, -- Minor Toughness
+        {id = iota(), abilityId = 61704, decayedId = nil}, -- Minor Endurance
+        {id = iota(), abilityId = 61666, decayedId = nil}, -- Minor Savagery
+        {id = iota(), abilityId = 61735, decayedId = nil}, -- Minor Expedition
+        {id = iota(), abilityId = 172055, decayedId = 172056}, -- Pillager's Profit Cooldown
+        {id = iota(), abilityId = 166731, decayedId = nil}, -- Rallying Cry
         {
             id = iota(),
             abilityId = 32834,
             icon = "/esoui/art/icons/achievement_u28_arena_hircine_boss_2_flavor.dds",
             decayedId = nil
         }, -- Sanctuary
-        {
-            id = iota(),
-            abilityId = 61506,
-            icon = "/esoui/art/icons/ability_ava_echoing_vigor.dds",
-            decayedId = nil
-        }, -- Echoing Vigor
-        {
-            id = iota(),
-            abilityId = 40079,
-            icon = "/esoui/art/icons/ability_restorationstaff_002a.dds",
-            decayedId = nil
-        }, -- Radiating Regen
-        {
-            id = iota(),
-            abilityId = 61722,
-            icon = "/esoui/art/icons/ability_buff_major_protection.dds",
-            decayedId = nil
-        }, -- Major Protection
-        {
-            id = iota(),
-            abilityId = 61716,
-            icon = "/esoui/art/icons/ability_buff_major_evasion.dds",
-            decayedId = nil
-        }, -- Major Evasion
-        {
-            id = iota(),
-            abilityId = 61715,
-            icon = "/esoui/art/icons/ability_buff_minor_evasion.dds",
-            decayedId = nil
-        }, -- Minor Evasion
-        {
-            id = iota(),
-            abilityId = 61721,
-            icon = "/esoui/art/icons/ability_buff_minor_protection.dds",
-            decayedId = nil
-        }, -- Minor Protection
-        {
-            id = iota(),
-            abilityId = 76936,
-            icon = "buffthegroup/Icons/AstoTransmutation.dds",
-            decayedId = nil
-        }, -- Robes of Transmutation
-        {
-            id = iota(),
-            abilityId = 61746,
-            icon = "/esoui/art/icons/ability_buff_minor_force.dds",
-            decayedId = nil
-        } -- Minor Force
+        {id = iota(), abilityId = 61506, decayedId = nil}, -- Echoing Vigor
+        {id = iota(), abilityId = 40079, decayedId = nil}, -- Radiating Regen
+        {id = iota(), abilityId = 61722, decayedId = nil}, -- Major Protection
+        {id = iota(), abilityId = 61716, decayedId = nil}, -- Major Evasion
+        {id = iota(), abilityId = 61715, decayedId = nil}, -- Minor Evasion
+        {id = iota(), abilityId = 61721, decayedId = nil}, -- Minor Protection
+        {id = iota(), abilityId = 76936, decayedId = nil}, -- Robes of Transmutation
+        {id = iota(), abilityId = 61746, decayedId = nil} -- Minor Force
     }
 }
 
 for _, v in pairs(s.data.buffs) do
+    v.icon = v.icon or GetAbilityIcon(v.abilityId)
     s.defaults.trackedBuffs[v.id] = {enabled = false, stackmode = false}
 
     s.defaults.framePositions[v.id] = {
@@ -322,7 +163,7 @@ function s.reset()
                     if (pIndex == 1) then
                         s.frames[buff.id].panels[pIndex].panel:SetAnchor(
                             TOPLEFT, FFBuffFrame, TOPLEFT, 0, 0)
-                    elseif (panelIndex <= s.sv.maxRows) then
+                    elseif (pIndex <= s.sv.maxRows) then
                         s.frames[buff.id].panels[pIndex].panel:SetAnchor(
                             TOPLEFT, s.frames[buff.id].panels[pIndex - 1].panel,
                             BOTTOMLEFT, 0, 0)
@@ -593,7 +434,7 @@ function s.groupSupportRangeUpdate(_, unitTag, inRange)
     local unit = s.units[unitTag]
     if (unit) then
         for _, buff in pairs(s.data.buffs) do
-            s.updateRange(i, s.units[unitTag].panelId, inRange)
+            s.updateRange(buff.id, s.units[unitTag].panelId, inRange)
         end
     end
 end
