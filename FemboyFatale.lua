@@ -8,7 +8,6 @@ r.description = "A bunch of PvP Utils made for a certain Femboy"
 r.author = "|cFFA500FlaminDemigod|r, bitrock, garlicmoon"
 r.version = "0.0.2"
 r.variableVersion = 1
--- r.stack = {w = 0, h = 0, items = {}}
 r.modules = r.modules or {}
 
 r.defaults = r.defaults or {};
@@ -23,8 +22,6 @@ function r.Initialize()
         module.init()
     end
     r.buildMenu()
-    -- r.stack.parent = r.WM:GetControlByName(r.name .. "Stack")
-    -- r.pool = ZO_ControlPool:New("FFSlice", r.stack.parent, "")
 end
 
 function r.OnAddOnLoaded(event, addonName)
@@ -33,12 +30,5 @@ function r.OnAddOnLoaded(event, addonName)
         r.EM:UnregisterForEvent(r.name, EVENT_ADD_ON_LOADED)
     end
 end
-
--- function r.Test()
---     local control, key = r.pool:AcquireObject()
---     control:SetAnchor(TOPLEFT, r.stack.parent, TOPLEFT, 0,
---                       control:GetHeight() * (key - 1))
---     table.insert(r.stack.items, control)
--- end
 
 r.EM:RegisterForEvent(r.name, EVENT_ADD_ON_LOADED, r.OnAddOnLoaded)
