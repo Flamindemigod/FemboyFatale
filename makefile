@@ -7,8 +7,8 @@ ADDON_PATH = $(shell pwd)
 
 all: clean format $(NAME).txt zip
 
-$(NAME).txt: build.lua $(wildcard modules/*.lua)
-	lua build.lua > $(NAME).txt
+$(NAME).txt: build.lua $(LUA_FILES)
+	lua build.lua -b
 
 clean:
 	@echo "Removing Build Artifacts"
