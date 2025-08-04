@@ -17,15 +17,15 @@ function FFUtils.Logger(moduleName, traceMode)
     -- 3 trace
     return {
         info = function(msg)
-            if (traceMode <= 1) then return nil end
+            if (traceMode < 1) then return nil end
             CHAT_SYSTEM:AddMessage("[" .. moduleName .. "] Info: " .. msg)
         end,
         debug = function(msg)
-            if (traceMode <= 2) then return nil end
+            if (traceMode < 2) then return nil end
             CHAT_SYSTEM:AddMessage("[" .. moduleName .. "] Debug: " .. msg)
         end,
         trace = function(msg)
-            if (traceMode <= 3) then return nil end
+            if (traceMode < 3) then return nil end
             CHAT_SYSTEM:AddMessage("[" .. moduleName .. "] Trace: " .. msg)
         end
     }
