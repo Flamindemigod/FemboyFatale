@@ -6,35 +6,46 @@ local s = FFTextures
 s.name = r.name .. "Textures"
 s.displayName = "FFTextures"
 s.defaults = {enabled = false}
+-- Funky Hashmap
+local overrides = {}
 
 s.data = {
-    -- Overrides are of the format of {Old Texture, New Texture}
     overrides = {
         {
-            "/esoui/art/icons/ability_healer_019.dds",
-            "FemboyFatale/icons/overrides/PA.dds", "Powerful Assult"
+            abilityId = 61771,
+            override = "FemboyFatale/icons/overrides/AstoPA.dds"
         }
     }
 }
 
-for _, v in pairs(s.data.overrides) do s.defaults[v[3]] = {enabled = true} end
+for idx, v in pairs(s.data.overrides) do
+    v.source = GetAbilityIcon(v.abilityId)
+    v.abilityName = GetAbilityName(v.abilityId)
+    s.defaults[idx] = {enabled = false}
+end
 
-local function reloadTexture(texture_name, old_texture_path, new_texture_path)
-    if (s.sv[texture_name].enabled) then
-        RedirectTexture(old_texture_path, new_texture_path)
+local function reloadTexture(texture_id)
+    local texture = s.data.overrides[texture_id]
+    if (s.sv.enabled and s.sv[texture_id].enabled) then
+        overrides[texture.abilityId] = texture_id
+        RedirectTexture(texture.source, texture.override)
     else
-        RedirectTexture(old_texture_path, old_texture_path)
+        overrides[texture.abilityId] = nil
+        RedirectTexture(texture.source, texture.source)
     end
 end
 
 function s.reset()
-    for _, v in pairs(s.data.overrides) do RedirectTexture(v[1], v[1]) end
+    for _, v in pairs(s.data.overrides) do
+        RedirectTexture(v.source, v.source)
+        overrides = {}
+    end
     s.init()
 end
 
 function s.init()
     if (s.sv.enabled ~= true) then return end
-    for _, v in pairs(s.data.overrides) do reloadTexture(v[3], v[1], v[2]) end
+    for idx, _ in pairs(s.data.overrides) do reloadTexture(idx) end
 end
 
 function s.menu(root)
@@ -58,24 +69,31 @@ function s.menu(root)
         }
     }
     local controls = parent.controls
-    for _, v in pairs(s.data.overrides) do
+    for idx, v in pairs(s.data.overrides) do
         controls[#controls + 1] = {
             type = "submenu",
-            name = "|c00FFCC" .. string.upper(v[3]) .. "|r",
+            name = "|c00FFCC" .. string.upper(v.abilityName) .. "|r",
             controls = {
                 {
                     type = "checkbox",
                     name = "Enable/Disable",
-                    getFunc = function() return s.sv.enabled end,
+                    getFunc = function()
+                        return s.sv[idx].enabled
+                    end,
                     setFunc = function(enable)
-                        s.sv[v[3]].enabled = enable
-                        reloadTexture(v[3], v[1], v[2])
+                        s.sv[idx].enabled = enable
+                        reloadTexture(idx)
                     end
                 }
 
             },
-            icon = v[2],
-            disabled = false
+            icon = function()
+                return s.sv[idx].enabled and v.override or v.source
+            end,
+            disabled = function()
+                return not s.sv.enabled and overrides[v.abilityId] ~= nil and
+                           overrides[abilityId] ~= idx
+            end
         }
     end
     root[#root + 1] = parent
