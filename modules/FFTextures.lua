@@ -116,7 +116,7 @@ function s.menu(root)
 end
 
 r.modules = r.modules or {}
-r.modules[s.name] = s
+r.modules[1] = s
 
 r.defaults = r.defaults or {};
-r.defaults[s.name] = s.defaults
+r.defaults[1] = s.defaults

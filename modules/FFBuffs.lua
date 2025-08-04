@@ -102,7 +102,7 @@ for _, v in pairs(s.data.buffs) do
     }
 end
 
-function s.reset()
+function s.resetInner()
     for _, buff in pairs(s.data.buffs) do
         for i = 1, GROUP_SIZE_MAX do
             s.frames[buff.id].panels[i].panel:ClearAnchors()
@@ -275,7 +275,7 @@ end
 function s.handleCommandInput(args)
     s.sv.enabled = not s.sv.enabled
     s.logger.info(s.sv.enabled and "Enabled" or "Disabled")
-    s.checkActivation()
+    r.reset()
 end
 
 function s.init()
@@ -284,10 +284,10 @@ function s.init()
     s.InitializeControls()
     s.logger.trace("Initialized Control")
     SLASH_COMMANDS["/ff/buff"] = s.handleCommandInput
-    SLASH_COMMANDS["/ff/buff/refresh"] = s.checkActivation
+    SLASH_COMMANDS["/ff/buff/refresh"] = s.reset
     s.logger.trace("Registered Slash Commands")
-    r.EM:RegisterForEvent(s.name, EVENT_PLAYER_ACTIVATED, s.checkActivation)
-    r.EM:RegisterForEvent(s.name, EVENT_RAID_TRIAL_STARTED, s.checkActivation)
+    r.EM:RegisterForEvent(s.name, EVENT_PLAYER_ACTIVATED, s.reset)
+    r.EM:RegisterForEvent(s.name, EVENT_RAID_TRIAL_STARTED, s.reset)
     s.logger.trace("Registered Base Events")
 end
 
@@ -331,10 +331,10 @@ function s.onMoveStop(id, frame)
     s.sv.framePositions[id].top = frame:GetTop()
 end
 
-function s.checkActivation()
+function s.reset()
     s.logger.trace("refreshing state")
     if (s.sv.enabled and (GetGroupSize() > 0 or s.debug)) then
-        s.reset()
+        s.resetInner()
         if (not s.showUI) then
             s.showUI = true
             r.EM:AddFilterForEvent(s.name, EVENT_UNIT_CREATED,
@@ -431,7 +431,7 @@ function s.groupMemberRoleChanged(_, unitTag, newRole)
         for _, buff in pairs(s.data.buffs) do
             s.frames[buff.id].panels[unit.panelId].role:SetTexture(s.data
                                                                        .roleIcons[newRole])
-            zo_callLater(s.checkActivation, 500)
+            zo_callLater(s.reset, 500)
         end
     end
 end
@@ -467,7 +467,7 @@ function s.menu(root)
                 getFunc = function() return s.sv.enabled end,
                 setFunc = function(value)
                     s.sv.enabled = value
-                    s.checkActivation()
+                    r.reset()
                 end
             }, {
                 type = "checkbox",
@@ -477,7 +477,7 @@ function s.menu(root)
                 getFunc = function() return s.sv.showOnlyDPS end,
                 setFunc = function(value)
                     s.sv.showOnlyDPS = value
-                    zo_callLater(s.checkActivation, 500)
+                    zo_callLater(s.reset, 500)
                 end
             }, {
                 type = "checkbox",
@@ -492,7 +492,7 @@ function s.menu(root)
                     else
                         s.sv.maxRows = 6
                     end
-                    zo_callLater(s.checkActivation, 500)
+                    zo_callLater(s.reset, 500)
                 end
             }, {
                 type = "checkbox",
@@ -517,7 +517,7 @@ function s.menu(root)
                     s.sv.startR = red * 255
                     s.sv.startG = green * 255
                     s.sv.startB = blue * 255
-                    zo_callLater(s.checkActivation, 500)
+                    zo_callLater(s.reset, 500)
                 end
             }, {
                 type = "colorpicker",
@@ -533,7 +533,7 @@ function s.menu(root)
                     s.sv.endR = red * 255
                     s.sv.endG = green * 255
                     s.sv.endB = blue * 255
-                    zo_callLater(s.checkActivation, 500)
+                    zo_callLater(s.reset, 500)
                 end
             }, {type = "header", name = " Major Buffs"},
             -- 'Major' buffs inserted here
@@ -548,7 +548,7 @@ function s.menu(root)
                     for _, buff in pairs(s.data.buffs) do
                         s.sv.trackedBuffs[buff.id].enabled = false
                     end
-                    s.checkActivation()
+                    r.reset()
                 end
             }, {
                 type = "button",
@@ -594,7 +594,7 @@ function s.menu(root)
                     end,
                     setFunc = function(value)
                         s.sv.trackedBuffs[buff.id].enabled = value
-                        s.checkActivation()
+                        r.reset()
                     end
                 }, {
                     type = "checkbox",
@@ -609,7 +609,7 @@ function s.menu(root)
                     end,
                     setFunc = function(value)
                         s.sv.trackedBuffs[buff.id].stackMode = value
-                        s.checkActivation()
+                        r.reset()
                     end
                 }
             }
@@ -632,7 +632,7 @@ function s.menu(root)
 end
 
 r.modules = r.modules or {}
-r.modules[s.name] = s
+r.modules[2] = s
 
 r.defaults = r.defaults or {};
-r.defaults[s.name] = s.defaults
+r.defaults[2] = s.defaults

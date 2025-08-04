@@ -12,6 +12,8 @@ r.modules = r.modules or {}
 
 r.defaults = r.defaults or {};
 
+function r.reset() for _, module in pairs(r.modules) do module.reset() end end
+
 function r.Initialize()
     r.sv = ZO_SavedVars:NewAccountWide(r.name .. "Vars", r.variableVersion, nil,
                                        r.defaults, GetWorldName())
