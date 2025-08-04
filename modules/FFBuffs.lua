@@ -26,7 +26,7 @@ s.defaults = {
     endB = 117
 }
 
-s.debug = true
+s.debug = 1
 
 s.showUI = false
 s.groupSize = 0
@@ -273,17 +273,22 @@ function s.updateStatus(id, unitTag)
 end
 
 function s.handleCommandInput(args)
-    d("TODO: Debug Handler")
     s.sv.enabled = not s.sv.enabled
+    s.logger.info(s.sv.enabled and "Enabled" or "Disabled")
     s.checkActivation()
 end
 
 function s.init()
+    s.logger = FFUtils.Logger(s.displayName, s.debug)
+    s.logger.trace("Initialized Logger")
     s.InitializeControls()
-    SLASH_COMMANDS["/ffbuff"] = s.handleCommandInput
-    SLASH_COMMANDS["/ffbuffrefresh"] = s.checkActivation
+    s.logger.trace("Initialized Control")
+    SLASH_COMMANDS["/ff/buff"] = s.handleCommandInput
+    SLASH_COMMANDS["/ff/buff/refresh"] = s.checkActivation
+    s.logger.trace("Registered Slash Commands")
     r.EM:RegisterForEvent(s.name, EVENT_PLAYER_ACTIVATED, s.checkActivation)
     r.EM:RegisterForEvent(s.name, EVENT_RAID_TRIAL_STARTED, s.checkActivation)
+    s.logger.trace("Registered Base Events")
 end
 
 function s.InitializeControls()
@@ -327,6 +332,7 @@ function s.onMoveStop(id, frame)
 end
 
 function s.checkActivation()
+    s.logger.trace("refreshing state")
     if (s.sv.enabled and (GetGroupSize() > 0 or s.debug)) then
         s.reset()
         if (not s.showUI) then
