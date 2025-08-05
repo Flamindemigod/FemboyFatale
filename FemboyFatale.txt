@@ -4,7 +4,7 @@
 ## APIVersion: 101043
 ## SavedVariables: FemboyFataleVars
 ## DependsOn: LibAddonMenu-2.0
-## Version: 0.0.2
+## Version: 0.0.3
 
 FemboyFatale.lua
 FemboyFatale.xml
