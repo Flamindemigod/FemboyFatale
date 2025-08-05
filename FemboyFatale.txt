@@ -1,0 +1,15 @@
+## Title: FemboyFatale
+## Description: A bunch of PvP Utils made for a certain Femboy
+## Author: |cFFA500FlaminDemigod|r, bitrock, garlicmoon
+## APIVersion: 101043
+## SavedVariables: FemboyFataleVars
+## DependsOn: LibAddonMenu-2.0
+## Version: 0.0.2
+
+FemboyFatale.lua
+FemboyFatale.xml
+FemboyFataleMenu.lua
+FemboyFataleUtils.lua
+
+modules/FFBuffs.lua
+modules/FFTextures.lua

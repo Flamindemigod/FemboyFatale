@@ -24,7 +24,19 @@ s.data = {
         {
             abilityId = 166731,
             overrides = {"FemboyFatale/icons/overrides/AstoRC.dds"}
-        } -- Rallying Cry
+        }, -- Rallying Cry
+        {
+            abilityId = 63029,
+            overrides = {"FemboyFatale/icons/overrides/JesusBeam.dds"}
+        },
+        {
+            abilityId = 63044,
+            overrides = {"FemboyFatale/icons/overrides/JesusBeam.dds"}
+        },
+        {
+            abilityId = 63046,
+            overrides = {"FemboyFatale/icons/overrides/JesusBeam.dds"}
+        }
     }
 }
 
