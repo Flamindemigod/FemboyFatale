@@ -635,4 +635,4 @@ r.modules = r.modules or {}
 r.modules[2] = s
 
 r.defaults = r.defaults or {};
-r.defaults[2] = s.defaults
+r.defaults[s.name] = s.defaults

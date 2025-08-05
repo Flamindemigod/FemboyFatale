@@ -131,4 +131,4 @@ r.modules = r.modules or {}
 r.modules[1] = s
 
 r.defaults = r.defaults or {};
-r.defaults[1] = s.defaults
+r.defaults[s.name] = s.defaults
