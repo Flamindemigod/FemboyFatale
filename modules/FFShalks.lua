@@ -174,7 +174,7 @@ function s.updateStatus(unitTag)
                                  stage.endColor.B
 
         local progress = FFUtils.Clamp(
-                                 1 - buffRemaining / buffData.buffDuration, 0, 1)
+                             1 - buffRemaining / buffData.buffDuration, 0, 1)
         local backdropSize = s.sv.progressMode and (1 - progress) * 160 or 160;
         progress = s.sv.gradientMode and progress or 0
 
@@ -197,7 +197,7 @@ function s.updateStatus(unitTag)
             end
             panel.bg:SetWidth(backdropSize)
         else
-            panel.bg:SetCenterColor(0, 0, 0, 0.5)
+            panel.bg:SetCenterColor(0, 0, 0, 0)
             panel.stat:SetText("0")
             panel.bg:SetWidth(160)
             if (buffData.stage == 2) then
@@ -292,7 +292,7 @@ function s.initializeControls()
         s.frame.panels[i].container:SetEdgeColor(0, 0, 0, 0)
         s.frame.panels[i].container:SetCenterColor(0, 0, 0, 0.5)
         s.frame.panels[i].bg:SetEdgeColor(0, 0, 0, 0)
-        s.frame.panels[i].bg:SetCenterColor(0, 0, 0, 0.5)
+        s.frame.panels[i].bg:SetCenterColor(0, 0, 0, 0)
         s.frame.panels[i].stat:SetColor(1, 1, 1, 1)
         s.frame.panels[i].stat:SetText("0")
     end
@@ -372,7 +372,7 @@ function s.menu(root)
                 setFunc = function(value)
                     s.sv.progressMode = value
                 end
-            },{type = "header", name = "First Stage Color"}, {
+            }, {type = "header", name = "First Stage Color"}, {
                 type = "colorpicker",
                 width = "half",
                 name = "Start",
