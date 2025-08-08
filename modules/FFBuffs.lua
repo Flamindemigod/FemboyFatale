@@ -94,7 +94,11 @@ s.data = {
 
 for _, v in pairs(s.data.buffs) do
     v.icon = v.icon or GetAbilityIcon(v.abilityId)
-    s.defaults.trackedBuffs[v.id] = {enabled = false, stackmode = false}
+    s.defaults.trackedBuffs[v.id] = {
+        enabled = false,
+        stackmode = false,
+        progressMode = false
+    }
 
     s.defaults.framePositions[v.id] = {
         left = 1300,
@@ -226,7 +230,7 @@ function s.updateStatus(id, unitTag)
                 panel.bg:SetCenterColor(r, g, b, 0.8 - 0.5 * progress)
             end
         else
-            panel.bg:SetCenterColor(0, 0, 0, 0.5)
+            panel.bg:SetCenterColor(0, 0, 0, 0)
             panel.stat:SetText("0")
             if (not buffData.hasBuff) then buffData.endTime = nil end
         end
@@ -236,10 +240,12 @@ function s.updateStatus(id, unitTag)
         local startR, startG, startB = s.sv.startR, s.sv.startG, s.sv.startB
         local endR, endG, endB = s.sv.endR, s.sv.endG, s.sv.endB
 
-        local progress = s.sv.gradientMode and
-                             FFUtils.Clamp(
-                                 1 - buffRemaining / buffData.buffDuration, 0, 1) or
-                             0
+        local progress = FFUtils.Clamp(
+                             1 - buffRemaining / buffData.buffDuration, 0, 1)
+        local backdropSize = s.sv.trackedBuffs[id].progressMode and
+                                 (1 - progress) * 160 or 160;
+        progress = s.sv.gradientMode and progress or 0
+
         local r, g, b = (s.sv.gradientMode and
                             FFUtils.Interpolate(startR, endR, progress) or
                             startR) / 255,
@@ -257,6 +263,7 @@ function s.updateStatus(id, unitTag)
             else
                 panel.bg:SetCenterColor(r, g, b, 0.8 - 0.5 * progress)
             end
+            panel.bg:SetWidth(backdropSize)
         elseif (buffData.endTime == -1) then
             panel.stat:SetText("")
             if (unit.self) then
@@ -265,7 +272,7 @@ function s.updateStatus(id, unitTag)
                 panel.bg:SetCenterColor(r, g, b, 0.8)
             end
         else
-            panel.bg:SetCenterColor(0, 0, 0, 0.5)
+            panel.bg:SetCenterColor(0, 0, 0, 0)
             panel.stat:SetText("0")
             if (not buffData.hasBuff) then buffData.endTime = nil end
         end
@@ -310,13 +317,16 @@ function s.InitializeControls()
                               "FFBuffPanel", i)
             s.frames[buff.id].panels[i] = {
                 panel = panel,
+                container = panel:GetNamedChild("Container"),
                 bg = panel:GetNamedChild("Backdrop"),
                 name = panel:GetNamedChild("Name"),
                 role = panel:GetNamedChild("Role"),
                 stat = panel:GetNamedChild("Stat")
             }
+            s.frames[buff.id].panels[i].container:SetEdgeColor(0, 0, 0, 0)
+            s.frames[buff.id].panels[i].container:SetCenterColor(0, 0, 0, 0.5)
             s.frames[buff.id].panels[i].bg:SetEdgeColor(0, 0, 0, 0)
-            s.frames[buff.id].panels[i].bg:SetCenterColor(0, 0, 0, 0.5)
+            s.frames[buff.id].panels[i].bg:SetCenterColor(0, 0, 0, 0)
             s.frames[buff.id].panels[i].stat:SetColor(1, 1, 1, 1)
             s.frames[buff.id].panels[i].stat:SetText("0")
         end
@@ -597,7 +607,7 @@ function s.menu(root)
                     end,
                     setFunc = function(value)
                         s.sv.trackedBuffs[buff.id].enabled = value
-                        r.reset()
+                        zo_callLater(s.reset, 500)
                     end
                 }, {
                     type = "checkbox",
@@ -612,9 +622,25 @@ function s.menu(root)
                     end,
                     setFunc = function(value)
                         s.sv.trackedBuffs[buff.id].stackMode = value
-                        r.reset()
+                        zo_callLater(s.reset, 500)
+                    end
+                }, {
+                    type = "checkbox",
+                    name = "Progress Mode",
+                    width = "half",
+                    disabled = function()
+                        return not s.sv.trackedBuffs[buff.id].enabled
+                    end,
+                    default = false,
+                    getFunc = function()
+                        return s.sv.trackedBuffs[buff.id].progressMode
+                    end,
+                    setFunc = function(value)
+                        s.sv.trackedBuffs[buff.id].progressMode = value
+                        zo_callLater(s.reset, 500)
                     end
                 }
+
             }
         }
         if (buffName:find("Major")) then
