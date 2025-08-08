@@ -88,7 +88,8 @@ s.data = {
         {id = iota(), abilityId = 61715, decayedId = nil}, -- Minor Evasion
         {id = iota(), abilityId = 61721, decayedId = nil}, -- Minor Protection
         {id = iota(), abilityId = 76936, decayedId = nil}, -- Robes of Transmutation
-        {id = iota(), abilityId = 61746, decayedId = nil} -- Minor Force
+        {id = iota(), abilityId = 61746, decayedId = nil}, -- Minor Force
+        {id = iota(), abilityId = 61500, decayedId = nil} -- Proximity Detonation
     }
 }
 
