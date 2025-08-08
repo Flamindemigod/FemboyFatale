@@ -61,14 +61,18 @@ end
 function s.reset()
     for _, v in pairs(s.data.textures) do RedirectTexture(v.source, v.source) end
     s.logger.trace("Reset All Textures")
-    s.init()
+    s.initInner()
+end
+
+function s.initInner()
+    if (s.sv.enabled ~= true) then return end
+    for _, v in pairs(s.data.textures) do reloadTexture(v.abilityId) end
 end
 
 function s.init()
     s.logger = FFUtils.Logger(s.displayName, s.debug)
     s.logger.trace("Initialized Logger")
-    if (s.sv.enabled ~= true) then return end
-    for _, v in pairs(s.data.textures) do reloadTexture(v.abilityId) end
+    s.reset()
     s.logger.trace("Initialized Textures")
 end
 
