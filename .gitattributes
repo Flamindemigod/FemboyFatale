@@ -1,3 +1,5 @@
 .git* export-ignore
 .lua-format export-ignore
+build.lua export-ignore
+generateTextures.sh export-ignore
 makefile export-ignore
