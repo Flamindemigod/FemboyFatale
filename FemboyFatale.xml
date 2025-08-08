@@ -11,6 +11,10 @@
     <Control name="FFBuffPanel" resizeToFitDescendents="true" hidden="true" virtual="true">
     <!-- Background -->
       <Controls>
+        <Backdrop name="$(parent)Container">
+          <Anchor point="LEFT" />
+          <Dimensions x="160" y="24" />
+        </Backdrop>
         <Backdrop name="$(parent)Backdrop">
           <Anchor point="LEFT" />
           <Dimensions x="160" y="24" />

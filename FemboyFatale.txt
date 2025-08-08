@@ -12,4 +12,5 @@ FemboyFataleMenu.lua
 FemboyFataleUtils.lua
 
 modules/FFBuffs.lua
+modules/FFShalks.lua
 modules/FFTextures.lua
