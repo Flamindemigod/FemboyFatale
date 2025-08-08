@@ -173,11 +173,10 @@ function s.updateStatus(unitTag)
         local endR, endG, endB = stage.endColor.R, stage.endColor.G,
                                  stage.endColor.B
 
-        local progress = s.sv.gradientMode and
-                             FFUtils.Clamp(
-                                 1 - buffRemaining / buffData.buffDuration, 0, 1) or
-                             0
+        local progress = FFUtils.Clamp(
+                                 1 - buffRemaining / buffData.buffDuration, 0, 1)
         local backdropSize = s.sv.progressMode and (1 - progress) * 160 or 160;
+        progress = s.sv.gradientMode and progress or 0
 
         local r, g, b = (s.sv.gradientMode and
                             FFUtils.Interpolate(startR, endR, progress) or
@@ -364,7 +363,16 @@ function s.menu(root)
                 setFunc = function(value)
                     s.sv.gradientMode = value
                 end
-            }, {type = "header", name = "First Stage Color"}, {
+            }, {
+                type = "checkbox",
+                name = "Progress Mode",
+                tooltip = "Changes whether the buff duration will decay by reducing the size of the bar",
+                default = s.defaults.progressMode,
+                getFunc = function() return s.sv.progressMode end,
+                setFunc = function(value)
+                    s.sv.progressMode = value
+                end
+            },{type = "header", name = "First Stage Color"}, {
                 type = "colorpicker",
                 width = "half",
                 name = "Start",
@@ -421,15 +429,15 @@ function s.menu(root)
                 name = "End",
                 tooltip = "Sets the color of the end of the gradient for the second stage of shalks.",
                 getFunc = function()
-                    local red = s.sv.stages[1].endColor.R / 255.0
-                    local green = s.sv.stages[1].endColor.G / 255.0
-                    local blue = s.sv.stages[1].endColor.B / 255.0
+                    local red = s.sv.stages[2].endColor.R / 255.0
+                    local green = s.sv.stages[2].endColor.G / 255.0
+                    local blue = s.sv.stages[2].endColor.B / 255.0
                     return red, green, blue
                 end,
                 setFunc = function(red, green, blue, alpha)
-                    s.sv.stages[1].endColor.R = red * 255
-                    s.sv.stages[1].endColor.G = green * 255
-                    s.sv.stages[1].endColor.B = blue * 255
+                    s.sv.stages[2].endColor.R = red * 255
+                    s.sv.stages[2].endColor.G = green * 255
+                    s.sv.stages[2].endColor.B = blue * 255
                     zo_callLater(s.reset, 500)
                 end
             }
