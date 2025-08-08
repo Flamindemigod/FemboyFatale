@@ -288,6 +288,9 @@ function s.init()
     s.logger.trace("Registered Slash Commands")
     r.EM:RegisterForEvent(s.name, EVENT_PLAYER_ACTIVATED, s.reset)
     r.EM:RegisterForEvent(s.name, EVENT_RAID_TRIAL_STARTED, s.reset)
+    r.EM:RegisterForEvent(s.name, EVENT_UNIT_CREATED, s.reset)
+    r.EM:RegisterForEvent(s.name, EVENT_GROUP_MEMBER_JOINED, s.reset)
+    r.EM:RegisterForEvent(s.name, EVENT_GROUP_MEMBER_LEFT, s.reset)
     s.logger.trace("Registered Base Events")
 end
 
