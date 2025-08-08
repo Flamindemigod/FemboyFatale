@@ -5,7 +5,7 @@ local s = FFShalks
 s.name = r.name .. "Shalks"
 s.displayName = "FFShalks"
 s.defaults = {
-    enabled = true,
+    enabled = false,
     framePosition = {left = 1300, top = 150},
     gradientMode = true,
     singleColumnMode = false,
