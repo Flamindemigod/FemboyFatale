@@ -89,7 +89,9 @@ s.data = {
         {id = iota(), abilityId = 61721, decayedId = nil}, -- Minor Protection
         {id = iota(), abilityId = 76936, decayedId = nil}, -- Robes of Transmutation
         {id = iota(), abilityId = 61746, decayedId = nil}, -- Minor Force
-        {id = iota(), abilityId = 61500, decayedId = nil} -- Proximity Detonation
+        {id = iota(), abilityId = 61500, decayedId = nil}, -- Proximity Detonation
+        {id = iota(), abilityId = 40211, decayedId = nil}, -- Retreating Manuver
+        {id = iota(), abilityId = 61662, decayedId = nil} -- Minor Brutality
     }
 }
 
@@ -297,8 +299,6 @@ function s.init()
     r.EM:RegisterForEvent(s.name, EVENT_PLAYER_ACTIVATED, s.reset)
     r.EM:RegisterForEvent(s.name, EVENT_RAID_TRIAL_STARTED, s.reset)
     r.EM:RegisterForEvent(s.name, EVENT_UNIT_CREATED, s.reset)
-    r.EM:RegisterForEvent(s.name, EVENT_GROUP_MEMBER_JOINED, s.reset)
-    r.EM:RegisterForEvent(s.name, EVENT_GROUP_MEMBER_LEFT, s.reset)
     s.logger.trace("Registered Base Events")
 end
 

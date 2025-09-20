@@ -6,7 +6,7 @@ r.WM = GetWindowManager()
 r.name = "FemboyFatale"
 r.description = "A bunch of PvP Utils made for a certain Femboy"
 r.author = "|cFFA500FlaminDemigod|r, bitrock, garlicmoon"
-r.version = "0.0.4"
+r.version = "0.0.5"
 r.variableVersion = 1
 r.modules = r.modules or {}
 
